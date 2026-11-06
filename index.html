@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123c30">
+  <meta name="description" content="DAYFLOW — 하루의 일정과 기록을 더 간결하게. 현재 개발 중입니다.">
+  <title>DAYFLOW | 곧 공개됩니다</title>
+  <style>
+    :root {
+      --board: #123c30;
+      --board-deep: #0b2b23;
+      --chalk: #f5f3e9;
+      --muted: #c4d1c8;
+      --yellow: #f0d66d;
+      --red: #df7772;
+      --line: rgba(245,243,233,.22);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--chalk);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 12%, rgba(255,255,255,.075), transparent 32%),
+        radial-gradient(ellipse at 82% 78%, rgba(0,0,0,.22), transparent 42%),
+        repeating-linear-gradient(7deg, rgba(255,255,255,.012) 0 1px, transparent 1px 5px),
+        linear-gradient(135deg, var(--board), var(--board-deep));
+      display: flex; align-items: center; justify-content: center;
+      padding: 36px 18px; overflow-x: hidden;
+    }
+    .frame {
+      width: min(920px, 100%); position: relative;
+      border: 1px solid rgba(245,243,233,.38); border-radius: 28px;
+      padding: clamp(28px, 6vw, 64px);
+      box-shadow: 0 24px 80px rgba(0,0,0,.28), inset 0 0 0 7px rgba(245,243,233,.025);
+      background: rgba(4,24,19,.16);
+    }
+    .frame:before {
+      content:""; position:absolute; inset:10px; border:1px dashed rgba(245,243,233,.10);
+      border-radius:20px; pointer-events:none;
+    }
+    header, main, footer { position: relative; z-index: 1; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:13px; font-weight:800; letter-spacing:.16em; }
+    .mark { width:48px; height:48px; flex:none; }
+    .status {
+      border:1px solid rgba(240,214,109,.65); color:var(--yellow);
+      border-radius:999px; padding:8px 13px; font-size:12px; letter-spacing:.08em;
+      white-space:nowrap;
+    }
+    main { text-align:center; padding: clamp(52px, 9vw, 88px) 0 54px; }
+    .eyebrow { color:var(--yellow); font-size:12px; letter-spacing:.24em; font-weight:700; }
+    h1 {
+      margin:18px 0 14px; font-size:clamp(42px, 8vw, 76px); line-height:1.05;
+      letter-spacing:.045em; font-weight:900;
+      text-shadow: 0 2px 0 rgba(255,255,255,.08);
+    }
+    .chalk-line { width:100px; height:4px; background:var(--yellow); border-radius:50%; margin:0 auto 28px; transform:rotate(-2deg); }
+    .lead { font-size:clamp(18px, 3vw, 24px); line-height:1.65; font-weight:700; }
+    .desc { max-width:590px; margin:13px auto 0; color:var(--muted); line-height:1.9; font-size:15px; word-break:keep-all; }
+    .teasers { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:38px auto 0; max-width:690px; text-align:left; }
+    .teaser { padding:17px 16px; border:1px solid var(--line); border-radius:15px; background:rgba(255,255,255,.045); }
+    .teaser b { display:block; margin-bottom:7px; color:var(--chalk); font-size:14px; }
+    .teaser span { color:var(--muted); font-size:12px; line-height:1.6; }
+    .dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--red); margin-right:7px; vertical-align:1px; }
+    .developer {
+      display:inline-flex; align-items:center; gap:9px; margin-top:34px;
+      border-top:1px solid var(--line); padding-top:19px; color:var(--muted); font-size:13px;
+    }
+    .developer strong { color:var(--chalk); letter-spacing:.08em; }
+    footer {
+      display:flex; justify-content:space-between; gap:14px; align-items:center;
+      border-top:1px solid var(--line); padding-top:18px; color:rgba(245,243,233,.62);
+      font-size:11px; letter-spacing:.04em;
+    }
+    @media (max-width:620px) {
+      .frame { padding:25px 20px; border-radius:22px; }
+      header { align-items:flex-start; }
+      .status { font-size:10px; padding:7px 9px; }
+      .teasers { grid-template-columns:1fr; max-width:360px; }
+      .teaser { padding:14px 15px; }
+      footer { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <header>
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 64 64" role="img" aria-label="DAYFLOW 달력 로고">
+          <rect x="3" y="3" width="58" height="58" rx="12" fill="none" stroke="#f5f3e9" stroke-width="2.5"/>
+          <path d="M16 19v-5M48 19v-5M12 23h40" fill="none" stroke="#f5f3e9" stroke-width="2.5" stroke-linecap="round"/>
+          <g stroke-width="3" fill="none">
+            <path d="M15 30h7M15 39h7M15 48h7" stroke="#df7772" stroke-linecap="round"/>
+            <path d="M29 30h7M29 39h7M29 48h7M43 30h7M43 39h7M43 48h7" stroke="#f5f3e9" stroke-linecap="round"/>
+          </g>
+          <circle cx="47" cy="47" r="10" fill="#123c30" stroke="#f5f3e9" stroke-width="2"/>
+          <path d="M47 41v6l4 2" fill="none" stroke="#f5f3e9" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span>DAYFLOW</span>
+      </div>
+      <div class="status"><span class="dot"></span>현재 개발 중</div>
+    </header>
+
+    <main>
+      <div class="eyebrow">A NEW WAY TO ORGANIZE YOUR DAY</div>
+      <h1>DAYFLOW</h1>
+      <div class="chalk-line"></div>
+      <div class="lead">하루를 정리하는 새로운 흐름,<br>곧 공개됩니다.</div>
+      <p class="desc">
+        일정과 메모, 중요한 날짜를 한곳에서.<br>
+        복잡한 하루는 더 간결하게, 놓치기 쉬운 순간은 더 선명하게 관리하는
+        개인용 일정 관리 프로그램을 만들고 있습니다.
+      </p>
+
+      <section class="teasers" aria-label="주요 기능">
+        <div class="teaser">
+          <b>01 · 일정과 달력</b>
+          <span>한눈에 확인하고 편리하게 정리하는 나만의 일정</span>
+        </div>
+        <div class="teaser">
+          <b>02 · 메모와 D-Day</b>
+          <span>기억할 내용과 다가오는 중요한 날을 한곳에</span>
+        </div>
+        <div class="teaser">
+          <b>03 · 나만의 관리 도구</b>
+          <span>백업, 잠금, 환율 계산 등 실용적인 기능을 준비 중</span>
+        </div>
+      </section>
+
+      <div class="developer">
+        <span>MADE BY</span>
+        <strong>CHALKMAKER</strong>
+        <span>· DAYFLOW LAB</span>
+      </div>
+    </main>
+
+    <footer>
+      <span>DAYFLOW · PERSONAL SCHEDULE &amp; LIFE MANAGEMENT</span>
+      <span>Details are being prepared. Stay tuned.</span>
+    </footer>
+  </div>
+</body>
+</html>
